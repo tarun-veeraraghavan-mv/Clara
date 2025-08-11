@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+langgraph = "*"
+langchain-openai = "*"
+langchain = "*"
+langchain-community = "*"
+pinecone = "*"
+langchain-pinecone = "*"
+djangorestframework-simplejwt = "*"
+drf-spectacular = "*"
+nltk = "*"
+openai-whisper = "*"
+google-auth = "*"
+python-dotenv = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.13"

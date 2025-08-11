@@ -1,0 +1,45 @@
+# Environment variables
+.env
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+# Pipenv specific (if virtual env is inside project)
+Pipfile.venv
+
+# Editor/IDE specific
+.vscode/
+.idea/
+
+# Test and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Logs
+*.log
+
+# Database
+db.sqlite3
+
+# NLTK data (if downloaded locally)
+nltk_data/
+
+# Whisper models (if downloaded locally)
+.whisper/
+
+# Uploaded files (as seen in backend/uploaded_files/)
+uploaded_files/
+
+# macOS specific
+.DS_Store
