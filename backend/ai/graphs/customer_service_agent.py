@@ -15,7 +15,7 @@ from ..nodes.customer_service_agent import (
 )
 from ..nodes.sentiment_analyzer import sentiment_analyzer
 from ..utils.llm import get_bot_settings
-from api.models import ChatMessage, ChatSession
+from api.models.chat import ChatMessage, ChatSession # Updated import
 from django.contrib.auth.models import User
 
 def cache_router(state: AgentState) -> str:

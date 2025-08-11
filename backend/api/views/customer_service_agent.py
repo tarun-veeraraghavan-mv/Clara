@@ -4,7 +4,8 @@ from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
 from ai.utils.vector_store import vectorstore
 from ai.graphs.customer_service_agent import run_ai_pipeline
-from ..models import ChatSession, BotSettings, ChatMessage
+from ..models.chat import ChatSession, ChatMessage
+from ..models.bot_settings import BotSettings
 from ..serializers import ChatSessionSerializer, ChatMessageSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response

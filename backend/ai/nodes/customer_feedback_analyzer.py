@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from ..agent_state import CustomerFeedbackAnalysisState
 from ..utils.llm import llm
 from ..prompts import analyze_customer_feedback_prompt
-from api.models import CustomerFeedback, ChatSession
+from api.models.feedback import CustomerFeedback # Updated import
+from api.models.chat import ChatSession # Updated import
 
 class CustomerFeedbackOutputParser(BaseModel):
     rating: int = Field(description="The rating the user gave out of 5 in integer type")

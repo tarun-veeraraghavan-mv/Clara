@@ -1,5 +1,5 @@
 from langchain_openai import ChatOpenAI
-from api.models import BotSettings
+from api.models.bot_settings import BotSettings # Updated import
 import os
 from dotenv import load_dotenv
 

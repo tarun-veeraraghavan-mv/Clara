@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from ..models import BotSettings
+from ..models.bot_settings import BotSettings # Updated import
 from ..serializers import BotSettingsSerializer
 
 @api_view(["POST"])

@@ -9,15 +9,11 @@ from dotenv import load_dotenv
 
 from ai.graphs.customer_feedback_analyzer import run_customer_feedback_pipeline
 
-
-
 import whisper
 
 load_dotenv()
 
 model = whisper.load_model("base")
-
-
 
 @api_view(["POST"])
 def run_huggingface_inference(request):
@@ -35,10 +31,6 @@ def run_huggingface_inference(request):
         return Response(response.json(), status=status.HTTP_200_OK)
     except requests.exceptions.RequestException as e:
         return Response({"error": f"Hugging Face API request failed: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
-
-from ai.utils.speech_to_text import speech_to_text as transcribe_speech # Import the utility function
 
 @api_view(["POST"])
 def speech_to_text(request):

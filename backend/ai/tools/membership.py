@@ -1,5 +1,5 @@
 from langchain_core.tools import tool
-from api.models import UserMembership
+from api.models.membership import UserMembership # Updated import
 
 @tool
 def get_user_membership(user_id: int):
@@ -40,4 +40,3 @@ def freeze_membership(user_id: int):
     user_membership.save()
 
     return f"Your membership has been freezed"
-

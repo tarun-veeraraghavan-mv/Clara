@@ -1,4 +1,4 @@
-from ..models import MembershipPlan
+from ..models.membership import MembershipPlan # Updated import
 from ..serializers import MembershipPlanSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response

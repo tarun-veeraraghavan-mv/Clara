@@ -1,5 +1,5 @@
 from langchain_core.tools import tool
-from api.models import UserMembership, MembershipPlan
+from api.models.membership import UserMembership, MembershipPlan # Updated import
 from django.utils import timezone
 
 @tool

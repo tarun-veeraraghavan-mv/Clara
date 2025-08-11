@@ -1,5 +1,5 @@
 from ..agent_state import AgentState
-from api.models import ChatMessage, ChatSession
+from api.models.chat import ChatMessage, ChatSession # Updated import
 from langchain_core.messages import HumanMessage, AIMessage
 from ..agents import agent_executor
 from django.contrib.auth.models import User
@@ -126,5 +126,3 @@ def speech_to_text_node(state: AgentState) -> AgentState:
             print(f"Error during speech to text conversion: {e}")
             state["user_input"] = "Error: Could not process audio." # Fallback
     return state
-
-  

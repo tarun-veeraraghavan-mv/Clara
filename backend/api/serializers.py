@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import MembershipPlan, ChatSession, ChatMessage, BotSettings
+from .models.membership import MembershipPlan
+from .models.chat import ChatSession, ChatMessage
+from .models.bot_settings import BotSettings
 
 class BotSettingsSerializer(serializers.ModelSerializer):
     class Meta:

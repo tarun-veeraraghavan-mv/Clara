@@ -1,5 +1,6 @@
 from rest_framework.decorators import api_view
-from ..models import ChatMessage, CustomerFeedback
+from ..models.chat import ChatMessage # Updated import
+from ..models.feedback import CustomerFeedback # Updated import
 from django.db.models import Avg
 from rest_framework.response import Response
 from rest_framework import status
