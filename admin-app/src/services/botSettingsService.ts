@@ -21,16 +21,33 @@ export const getBotSettings = async (): Promise<BotSettings> => {
 };
 
 export const createBotSettings = async (settings: {
-  greetingMessage: string;
-  fallbackReply: string;
-  maxConvoHistory: number;
-  confidenceThreshold: number;
+  greeting_message: string;
+  fallback_reply: string;
+  max_conversation_history: number;
+  confidence_threshold: number;
 }) => {
   try {
     const response = await axios.post(`${API_URL}/bot-settings/`, settings);
     return response.data;
   } catch (error) {
     console.error('Error creating bot settings:', error);
+    throw error;
+  }
+};
+
+export const uploadDocument = async (file: File) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  try {
+    const response = await axios.post(`${API_URL}/upload-doc/`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error uploading document:", error);
     throw error;
   }
 };

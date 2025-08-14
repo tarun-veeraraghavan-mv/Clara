@@ -1,15 +1,20 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import { createBotSettings, getBotSettings } from '@/services/botSettingsService'; // Import getBotSettings
+import React, { useState, useEffect } from "react";
+import {
+  createBotSettings,
+  getBotSettings,
+  uploadDocument,
+} from "@/services/botSettingsService"; // Import getBotSettings
 
 const BotSettingsPage = () => {
-  const [greetingMessage, setGreetingMessage] = useState('');
-  const [fallbackReply, setFallbackReply] = useState('');
+  const [greetingMessage, setGreetingMessage] = useState("");
+  const [fallbackReply, setFallbackReply] = useState("");
   const [maxConvoHistory, setMaxConvoHistory] = useState(10);
   const [confidenceThreshold, setConfidenceThreshold] = useState(0.8);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [settingsExist, setSettingsExist] = useState(false); // To track if settings were fetched
+  const [settingsExist, setSettingsExist] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -25,8 +30,8 @@ const BotSettingsPage = () => {
           // No settings found, form will remain empty for creation
           setSettingsExist(false);
         } else {
-          setError('Failed to fetch bot settings.');
-          console.error('Error fetching bot settings:', err);
+          setError("Failed to fetch bot settings.");
+          console.error("Error fetching bot settings:", err);
         }
       } finally {
         setLoading(false);
@@ -41,18 +46,18 @@ const BotSettingsPage = () => {
     try {
       const settings = {
         greeting_message: greetingMessage, // Use snake_case for backend
-        fallback_reply: fallbackReply,     // Use snake_case for backend
+        fallback_reply: fallbackReply, // Use snake_case for backend
         max_conversation_history: maxConvoHistory,
         confidence_threshold: confidenceThreshold,
       };
       // For now, still using createBotSettings. Update logic will be added later.
       const response = await createBotSettings(settings);
-      console.log('Bot settings saved:', response);
-      alert('Bot settings saved successfully!');
+      console.log("Bot settings saved:", response);
+      alert("Bot settings saved successfully!");
       setSettingsExist(true); // After saving, settings now exist
     } catch (error) {
-      console.error('Failed to save bot settings:', error);
-      alert('Failed to save bot settings.');
+      console.error("Failed to save bot settings:", error);
+      alert("Failed to save bot settings.");
     }
   };
 
@@ -63,6 +68,28 @@ const BotSettingsPage = () => {
   if (error) {
     return <div>Error: {error}</div>;
   }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const handleFileUpload = async () => {
+    if (!file) {
+      alert("Please select a file to upload.");
+      return;
+    }
+
+    try {
+      const response = await uploadDocument(file);
+      console.log("File uploaded:", response);
+      alert("File uploaded successfully!");
+    } catch (error) {
+      console.error("Failed to upload file:", error);
+      alert("Failed to upload file.");
+    }
+  };
 
   return (
     <div>
@@ -87,7 +114,9 @@ const BotSettingsPage = () => {
           />
         </div>
         <div>
-          <label htmlFor="maxConvoHistory">Max Conversation History Length</label>
+          <label htmlFor="maxConvoHistory">
+            Max Conversation History Length
+          </label>
           <input
             type="number"
             id="maxConvoHistory"
@@ -107,7 +136,14 @@ const BotSettingsPage = () => {
             onChange={(e) => setConfidenceThreshold(parseFloat(e.target.value))}
           />
         </div>
-        <button type="submit">{settingsExist ? "Update Settings" : "Create Settings"}</button>
+        <div>
+          <label htmlFor="file">Upload File</label>
+          <input type="file" id="file" onChange={handleFileChange} />
+          <button type="button" onClick={handleFileUpload}>Upload</button>
+        </div>
+        <button type="submit">
+          {settingsExist ? "Update Settings" : "Create Settings"}
+        </button>
       </form>
     </div>
   );

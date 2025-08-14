@@ -4,6 +4,8 @@ from .views.customer_service_agent import create_session, get_session_messages, 
 from .views.customer_feedback import analyse_customer_feedback
 from .views.analytics import get_analytics
 from .views.plans import get_all_plans
+from .views.auth import register_user, login_user, get_me, delete_me # New import
+from .views.upload_doc import upload_doc
 
 urlpatterns = [
     path("ai/", simple_ai, name="simple_ai"),
@@ -15,5 +17,12 @@ urlpatterns = [
     path("session-messages/<int:session_id>/", get_session_messages, name="get_session_messages"),
     path("bot-settings/", create_bot_settings, name="create_bot_settings"),
     path("analytics/", get_analytics, name="get_analytics"),
-    path("bot-settings/current/", get_current_bot_settings, name="get_current_bot_settings"), 
+    path("bot-settings/current/", get_current_bot_settings, name="get_current_bot_settings"),
+
+    # Auth URLs
+    path("auth/register/", register_user, name="register_user"),
+    path("auth/login/", login_user, name="login_user"),
+    path("auth/me/", get_me, name="get_me"),
+    path("auth/delete-me/", delete_me, name="delete_me"),
+    path("upload-doc/", upload_doc, name="upload_doc"),
 ]
