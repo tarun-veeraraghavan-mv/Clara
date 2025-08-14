@@ -5,8 +5,12 @@ import {
   getBotSettings,
   uploadDocument,
 } from "@/services/botSettingsService"; // Import getBotSettings
+import { useAuth } from "@/context/AuthContext"; // Add this import
 
 const BotSettingsPage = () => {
+  const { user } = useAuth(); // Get user from auth context
+  const userId = user?.id; // Get userId
+
   const [greetingMessage, setGreetingMessage] = useState("");
   const [fallbackReply, setFallbackReply] = useState("");
   const [maxConvoHistory, setMaxConvoHistory] = useState(10);
@@ -81,8 +85,13 @@ const BotSettingsPage = () => {
       return;
     }
 
+    if (!userId) {
+      alert("User not authenticated. Please log in.");
+      return;
+    }
+
     try {
-      const response = await uploadDocument(file);
+      const response = await uploadDocument(file, userId);
       console.log("File uploaded:", response);
       alert("File uploaded successfully!");
     } catch (error) {

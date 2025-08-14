@@ -35,9 +35,10 @@ export const createBotSettings = async (settings: {
   }
 };
 
-export const uploadDocument = async (file: File) => {
+export const uploadDocument = async (file: File, userId: number) => {
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("userId", userId.toString()); // Add userId to form data
 
   try {
     const response = await axios.post(`${API_URL}/upload-doc/`, formData, {

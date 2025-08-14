@@ -102,7 +102,7 @@ def load_faq(request):
 
     # Load and split the text file
     loader = TextLoader(file_path)
-    text_splitter = CharacterTextSplitter(separator="\n", chunk_size=300, chunk_overlap=100)
+    text_splitter = CharacterTextSplitter(separator="\n", chunk_size=300, chunk_overlap=100, add_start_index=True)
     docs = loader.load_and_split(text_splitter=text_splitter)
 
     # Vectorize and store

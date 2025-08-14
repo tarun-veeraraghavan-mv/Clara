@@ -19,6 +19,7 @@ nltk = "*"
 openai-whisper = "*"
 google-auth = "*"
 python-dotenv = "*"
+unstructured = {extras = ["all-docs"], version = "*"}
 
 [dev-packages]
 
